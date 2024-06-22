@@ -35,7 +35,7 @@ export default function ClassCard() {
 						</DialogTrigger>
 						<DialogContent>
 							<DialogHeader>
-								<DialogTitle>Mark Present ?</DialogTitle>
+								<DialogTitle>Mark as Present ?</DialogTitle>
 								<DialogDescription>
 									This action cannot be undone.
 								</DialogDescription>
@@ -52,7 +52,7 @@ export default function ClassCard() {
 						</DialogTrigger>
 						<DialogContent>
 							<DialogHeader>
-								<DialogTitle>Mark Absent ?</DialogTitle>
+								<DialogTitle>Mark as Absent ?</DialogTitle>
 								<DialogDescription>
 									This action cannot be undone.
 								</DialogDescription>
