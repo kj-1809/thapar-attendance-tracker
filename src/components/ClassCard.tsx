@@ -12,7 +12,7 @@ import {
 
 export default function ClassCard() {
 	return (
-		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between">
+		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">
 			<div className="flex">
 				<div className="flex flex-col justify-center">
 					<h1 className="text-6xl font-archivoBlack">9</h1>
@@ -40,10 +40,11 @@ export default function ClassCard() {
 									This action cannot be undone.
 								</DialogDescription>
 							</DialogHeader>
-							<button className = "bg-green-300 px-4 py-2 rounded-md">Mark present</button>
+							<button className="bg-green-300 px-4 py-2 rounded-md">
+								Mark present
+							</button>
 						</DialogContent>
 					</Dialog>
-
 					<Dialog>
 						<DialogTrigger>
 							<div className="rounded-full p-3 bg-red-100 m-2">
@@ -57,7 +58,9 @@ export default function ClassCard() {
 									This action cannot be undone.
 								</DialogDescription>
 							</DialogHeader>
-							<button className = "bg-red-300 px-4 py-2 rounded-md">Mark absent</button>
+							<button className="bg-red-300 px-4 py-2 rounded-md">
+								Mark absent
+							</button>
 						</DialogContent>
 					</Dialog>
 				</div>

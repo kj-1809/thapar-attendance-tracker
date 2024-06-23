@@ -8,24 +8,25 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, LayoutDashboard, LogOut, Settings } from "lucide-react";
+import Link from "next/link";
 
 export default function ProfileDropdown() {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="shadow-md rounded-md px-4 py-2 outline-none">
-				<div className = "flex">
-					Profile <ChevronDown />
-				</div>
-			</DropdownMenuTrigger>
+			<DropdownMenuTrigger className="shadow-md p-4 outline-none rounded-full h-12 w-12"></DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<DropdownMenuItem>
-					<LayoutDashboard />
-					<h1 className="ml-2">Dashboard</h1>
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-					<Settings />
-					<h1 className="ml-2">Settings</h1>
-				</DropdownMenuItem>
+				<Link href="/dashboard">
+					<DropdownMenuItem>
+						<LayoutDashboard />
+						<h1 className="ml-2">Dashboard</h1>
+					</DropdownMenuItem>
+				</Link>
+				<Link href="/settings">
+					<DropdownMenuItem>
+						<Settings />
+						<h1 className="ml-2">Settings</h1>
+					</DropdownMenuItem>
+				</Link>
 				<DropdownMenuItem>
 					<LogOut />
 					<h1 className="ml-2">Logout</h1>
