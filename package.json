@@ -16,7 +16,9 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.396.0",
     "next": "14.2.4",
+    "rc-progress": "^4.0.0",
     "react": "^18",
+    "react-circle-progress-bar": "^0.1.4",
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"

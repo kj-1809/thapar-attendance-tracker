@@ -1,5 +1,30 @@
+"use client";
 import React from "react";
+import Progress from "react-circle-progress-bar";
+
 export default function DashboardCard({ title, value, total }) {
-	const percentage = 66;
-	return <div className="rounded-md">{title}</div>;
+	const percentage = (value / total) * 100;
+	return (
+		<div className="rounded-xl flex p-2 shadow-lg justify-center flex-col items-center">
+			<Progress
+				progress={percentage}
+				strokeWidth={15}
+				subtitle={title}
+				className="inline-block"
+				transiitionDuration = {1}
+				gradient={
+					percentage < 75
+						? [
+							{ stop: 0.0, color: "#dc2626" },
+							{ stop: 1.0, color: "#ef4444" },
+						]
+						: [
+							{ stop: 0.0, color: "#22c55e" },
+							{ stop: 1.0, color: "#22c55e" },
+						]
+				}
+			/>
+			{title}
+		</div>
+	);
 }
