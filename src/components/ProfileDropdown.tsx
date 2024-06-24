@@ -7,7 +7,13 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, LayoutDashboard, LogOut, Settings } from "lucide-react";
+import {
+	ChevronDown,
+	LayoutDashboard,
+	LogOut,
+	Settings,
+	User,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function ProfileDropdown() {
@@ -25,6 +31,12 @@ export default function ProfileDropdown() {
 					<DropdownMenuItem>
 						<Settings />
 						<h1 className="ml-2">Settings</h1>
+					</DropdownMenuItem>
+				</Link>
+				<Link href = "/user-profile">
+					<DropdownMenuItem>
+						<User />
+						<h1 className="ml-2">My Account</h1>
 					</DropdownMenuItem>
 				</Link>
 				<DropdownMenuItem>
