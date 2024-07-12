@@ -13,4 +13,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AttendanceType {
+  PRESENT
+  ABSENT
+}
+
+model User {
+  id           String       @id
+  username     String
+  email        String
+  currentGroup String
+  takenClasses TakenClass[]
+  attendances  Attendance[]
+}
+
+model TakenClass {
+  id        String @id @default(cuid())
+  name      String
+  professor String
+  location  String
+  present   Int
+  absent    Int
+
+  attendances Attendance[]
+  User        User         @relation(fields: [userId], references: [id])
+  userId      String
+}
+
+model Attendance {
+  id   String         @id @default(cuid())
+  type AttendanceType
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  takenClassId String
+  takenClass   TakenClass @relation(fields: [takenClassId], references: [id])
+}
 
