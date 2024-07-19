@@ -12,25 +12,29 @@ export async function updateUserWithGroup(group: string) {
 				group_name: group,
 			},
 			select: {
-				group_name: true,
+				course_name: true,
 			},
 		});
 
 		const updatedCoursesToBeTaken = coursesToBeTaken.map((course) => {
 			return {
-				name: course.group_name,
+				name: course.course_name,
 				userId,
 			};
 		});
 
 		await prisma.$transaction([
-			prisma.user.update({
-				data: {
-					currentGroup: group,
-				},
+			prisma.user.upsert({
 				where: {
 					id: userId,
 				},
+				update: {
+					currentGroup: group,
+				},
+				create : {
+					id: userId,
+					currentGroup : group
+				}
 			}),
 			prisma.takenClass.createMany({
 				data: updatedCoursesToBeTaken,
