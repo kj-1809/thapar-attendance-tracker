@@ -6,6 +6,9 @@ export async function updateUserWithGroup(group: string) {
 	if (!userId) {
 		return { ok: false, message: "UNAUTHORIZED" };
 	}
+	if(group == ""){
+		return {ok: false, message: "Invalid group"}
+	}
 	try {
 		const coursesToBeTaken = await prisma.group_to_courses.findMany({
 			where: {
