@@ -42,7 +42,7 @@ const frameworks = [
 	},
 ];
 
-export function ComboboxDemo() {
+export function GroupSelector() {
 	const [open, setOpen] = React.useState(false);
 	const [value, setValue] = React.useState("");
 

@@ -1,4 +1,4 @@
-import { ComboboxDemo } from "@/components/GroupSelector";
+import { GroupSelector } from "@/components/GroupSelector";
 import {
 	Dialog,
 	DialogContent,
@@ -21,7 +21,7 @@ export default function Settings() {
 			<div className="mt-8 flex flex-col items-center">
 				<div className="flex items-center gap-8 my-2">
 					<h1>Change group forever</h1>
-					<ComboboxDemo />
+					<GroupSelector />
 				</div>
 				<div className=  "flex items-center gap-8 my-2">
 					<h1>Delete current attendance data</h1>
