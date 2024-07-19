@@ -9,37 +9,73 @@ datasource db {
 
 model User {
   id           String       @id
-  email        String
-  currentGroup String
-  name         String
-  attendances  Attendance[]
-  takenClasses TakenClass[]
+  email        String?
+  currentGroup String?
+  name         String?
+  takenClasses   TakenClass[]
+
+  @@map("user")
 }
 
 model TakenClass {
-  id          String       @id @default(cuid())
-  name        String
-  professor   String
-  location    String
-  present     Int
-  absent      Int
-  userId      String
+  id         String       @id
+  name       String
+  present    Int
+  absent     Int
+  userId     String
   attendances Attendance[]
-  User        User         @relation(fields: [userId], references: [id])
+  User       User         @relation(fields: [userId], references: [id])
 
-  @@index([userId], map: "TakenClass_userId_fkey")
+  @@index([userId], map: "taken_class_userId_fkey")
+  @@map("taken_class")
 }
 
 model Attendance {
-  id           String         @id @default(cuid())
+  id           String         @id
   type         AttendanceType
-  userId       String
   takenClassId String
   takenClass   TakenClass     @relation(fields: [takenClassId], references: [id])
-  user         User           @relation(fields: [userId], references: [id])
 
-  @@index([takenClassId], map: "Attendance_takenClassId_fkey")
-  @@index([userId], map: "Attendance_userId_fkey")
+  @@index([takenClassId], map: "attendance_takenClassId_fkey")
+  @@map("attendance")
+}
+
+model class_group {
+  name             String             @id @db.VarChar(50)
+  detail_class     detail_class[]
+  group_to_courses group_to_courses[]
+}
+
+model course {
+  name             String             @id @db.VarChar(50)
+  detail_class     detail_class[]
+  group_to_courses group_to_courses[]
+}
+
+model detail_class {
+  id          Int          @id @default(autoincrement())
+  course_name String?      @db.VarChar(50)
+  location    String?      @db.VarChar(50)
+  professor   String?      @db.VarChar(50)
+  type        String?      @db.VarChar(1)
+  group_name  String?      @db.VarChar(50)
+  slot        Int?
+  day         String?      @db.VarChar(50)
+  course      course?      @relation(fields: [course_name], references: [name], onDelete: Cascade, map: "detail_class_ibfk_1")
+  class_group class_group? @relation(fields: [group_name], references: [name], onDelete: Cascade, map: "detail_class_ibfk_2")
+
+  @@index([course_name], map: "course_name")
+  @@index([group_name], map: "group_name")
+}
+
+model group_to_courses {
+  group_name  String      @db.VarChar(50)
+  course_name String      @db.VarChar(50)
+  class_group class_group @relation(fields: [group_name], references: [name], onDelete: Cascade, map: "group_to_courses_ibfk_1")
+  course      course      @relation(fields: [course_name], references: [name], onDelete: Cascade, map: "group_to_courses_ibfk_2")
+
+  @@id([group_name, course_name])
+  @@index([course_name], map: "course_name")
 }
 
 enum AttendanceType {

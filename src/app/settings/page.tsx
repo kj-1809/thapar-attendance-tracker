@@ -7,12 +7,13 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import {Button} from "@/components/ui/button"
-import { buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import prisma from "@/lib/db"
 
-import {cn} from "@/lib/utils"
-export default function Settings() {
-	// <Button className = {cn("text-black",buttonVariants({variant : "outline"}))}>Confirm</Button>
+import { cn } from "@/lib/utils";
+export default async function Settings() {
+	const data = await prisma.class_group.findMany();
 	return (
 		<div>
 			<div className="flex justify-center">
@@ -21,9 +22,9 @@ export default function Settings() {
 			<div className="mt-8 flex flex-col items-center">
 				<div className="flex items-center gap-8 my-2">
 					<h1>Change group forever</h1>
-					<GroupSelector />
+					<GroupSelector data={data} />
 				</div>
-				<div className=  "flex items-center gap-8 my-2">
+				<div className="flex items-center gap-8 my-2">
 					<h1>Delete current attendance data</h1>
 					<Dialog>
 						<DialogTrigger>
