@@ -12,19 +12,19 @@ model User {
   email        String?
   currentGroup String?
   name         String?
-  takenClasses   TakenClass[]
+  takenClasses TakenClass[]
 
   @@map("user")
 }
 
 model TakenClass {
-  id         String       @id
-  name       String
-  present    Int
-  absent     Int
-  userId     String
+  id          String       @id @default(cuid())
+  name        String
+  present     Int          @default(0)
+  absent      Int          @default(0)
+  userId      String
   attendances Attendance[]
-  User       User         @relation(fields: [userId], references: [id])
+  User        User         @relation(fields: [userId], references: [id])
 
   @@index([userId], map: "taken_class_userId_fkey")
   @@map("taken_class")

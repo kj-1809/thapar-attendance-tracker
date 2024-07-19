@@ -2,22 +2,44 @@
 import prisma from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 export async function updateUserWithGroup(group: string) {
-  const { userId } = auth();
-  if (!userId) {
-    return { ok: false, message: "UNAUTHORIZED" };
-  }
-  try {
-    await prisma.user.update({
-      data: {
-        currentGroup: group,
-      },
-      where: {
-        id: userId,
-      },
-    });
-    return { ok: true };
-  } catch (err) {
-    console.log(err);
-    return { ok: false };
-  }
+	const { userId } = auth();
+	if (!userId) {
+		return { ok: false, message: "UNAUTHORIZED" };
+	}
+	try {
+		const coursesToBeTaken = await prisma.group_to_courses.findMany({
+			where: {
+				group_name: group,
+			},
+			select: {
+				group_name: true,
+			},
+		});
+
+		const updatedCoursesToBeTaken = coursesToBeTaken.map((course) => {
+			return {
+				name: course.group_name,
+				userId,
+			};
+		});
+
+		await prisma.$transaction([
+			prisma.user.update({
+				data: {
+					currentGroup: group,
+				},
+				where: {
+					id: userId,
+				},
+			}),
+			prisma.takenClass.createMany({
+				data: updatedCoursesToBeTaken,
+			}),
+		]);
+
+		return { ok: true };
+	} catch (err) {
+		console.log(err);
+		return { ok: false };
+	}
 }
