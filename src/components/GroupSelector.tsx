@@ -42,11 +42,17 @@ import {
 // 	},
 // ];
 
-export function GroupSelector({ data }: { data: { name: string }[]}) {
+export function GroupSelector({
+	value,
+	data,
+	onGroupSelect,
+}: {
+	value: string;
+	data: { name: string }[];
+	onGroupSelect: (value: string) => void;
+}) {
 	const [open, setOpen] = React.useState(false);
-	const [value, setValue] = React.useState("");
-
-	console.log(value)
+	console.log(value);
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
@@ -74,7 +80,7 @@ export function GroupSelector({ data }: { data: { name: string }[]}) {
 									key={item.name}
 									value={item.name}
 									onSelect={(currentValue) => {
-										setValue(currentValue === value ? "" : currentValue);
+										onGroupSelect(currentValue === value ? "" : currentValue);
 										setOpen(false);
 									}}
 								>
