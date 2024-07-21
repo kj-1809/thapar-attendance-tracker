@@ -13,6 +13,7 @@ model User {
   currentGroup String?
   name         String?
   takenClasses TakenClass[]
+  attendances  Attendance[]
 
   @@map("user")
 }
@@ -31,10 +32,15 @@ model TakenClass {
 }
 
 model Attendance {
-  id           String         @id
-  type         AttendanceType
+  id     String         @id @default(cuid())
+  type   AttendanceType
+  date   DateTime
+  slot   Int
+  userId String
+
   takenClassId String
-  takenClass   TakenClass     @relation(fields: [takenClassId], references: [id])
+  TakenClass   TakenClass @relation(fields: [takenClassId], references: [id])
+  User         User       @relation(fields: [userId], references: [id])
 
   @@index([takenClassId], map: "attendance_takenClassId_fkey")
   @@map("attendance")

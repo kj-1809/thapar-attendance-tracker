@@ -31,11 +31,11 @@ export default function Timetable({
 	group: string;
 }) {
 	const [date, setDate] = useState<Date>(new Date());
-	const [classes, setClasses] = useState(initialClasses);
+	const [classes, setClasses] = useState<any>(initialClasses);
 
 	const { isPending, mutate: fetchClasses } = useMutation({
 		mutationFn: async () => {
-			const data = await getClasses(date.getDay());
+			const data = await getClasses(date);
 			return data;
 		},
 		onSuccess: (data) => {
@@ -65,7 +65,7 @@ export default function Timetable({
 			{!isPending && (
 				<div className="flex flex-col items-center">
 					{classes.length == 0 && <h1>No classes! let's gooo!!!! </h1>}
-					{classes.map((class_item) => {
+					{classes.map((class_item: any) => {
 						return (
 							<ClassCard
 								key={class_item.id}
@@ -73,7 +73,7 @@ export default function Timetable({
 								professor={class_item.professor!}
 								location={class_item.location!}
 								time={slotToTime[class_item.slot || 0]}
-								flag={false}
+								markedAttendance={class_item.markedAttendance}
 							/>
 						);
 					})}
