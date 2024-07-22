@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Check, X } from "lucide-react";
 import React from "react";
 
@@ -11,6 +11,10 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useMutation } from "@tanstack/react-query";
+import { markAttendance } from "@/actions/attendance";
+import { AttendanceType } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function ClassCard({
 	name,
@@ -18,19 +22,37 @@ export default function ClassCard({
 	location,
 	time,
 	markedAttendance,
+	type,
+	slot,
+	date,
 }: {
 	name: string;
 	professor: string;
 	location: string;
 	time: string;
 	markedAttendance: number;
+	type: string;
+	slot: number;
+	date: Date;
 }) {
+	const router = useRouter();
 
-	const {} = useMutation({
-		mutationFn : () => {
-			await 
-		}											
-	})
+	const { mutate, isPending } = useMutation({
+		mutationFn: async (typeOfAttendance: AttendanceType) => {
+			return await markAttendance({
+				slot: slot,
+				date: date,
+				course_name: name,
+				type: typeOfAttendance,
+			});
+		},
+		onSuccess: () => {
+			// haha lol
+			console.log("success");
+			toast.success("attendance marked!");
+			router.refresh();
+		},
+	});
 
 	return (
 		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">
@@ -41,7 +63,9 @@ export default function ClassCard({
 				</div>
 				<div className="mx-4 h-32 w-1 bg-gray-300"></div>
 				<div className="flex flex-col justify-center">
-					<h1 className="text-xl">{name}</h1>
+					<h1 className="text-xl">
+						{name} " " {type}
+					</h1>
 					<h1 className="text-xl">{location}</h1>
 					<h1 className="text-xl">{professor}</h1>
 				</div>
@@ -50,6 +74,7 @@ export default function ClassCard({
 				<div className="flex items-center">
 					<div className="flex items-center">
 						<Dialog>
+							j
 							<DialogTrigger>
 								<div className="rounded-full p-3 bg-green-100 m-2">
 									<Check />
@@ -62,7 +87,12 @@ export default function ClassCard({
 										This action cannot be undone.
 									</DialogDescription>
 								</DialogHeader>
-								<button className="bg-green-300 px-4 py-2 rounded-md">
+								<button
+									className="bg-green-300 px-4 py-2 rounded-md"
+									onClick={() => {
+										mutate("PRESENT");
+									}}
+								>
 									Mark present
 								</button>
 							</DialogContent>
@@ -80,7 +110,12 @@ export default function ClassCard({
 										This action cannot be undone.
 									</DialogDescription>
 								</DialogHeader>
-								<button className="bg-red-300 px-4 py-2 rounded-md">
+								<button
+									className="bg-red-300 px-4 py-2 rounded-md"
+									onClick={() => {
+										mutate("ABSENT");
+									}}
+								>
 									Mark absent
 								</button>
 							</DialogContent>

@@ -74,6 +74,9 @@ export default function Timetable({
 								location={class_item.location!}
 								time={slotToTime[class_item.slot || 0]}
 								markedAttendance={class_item.markedAttendance}
+								date = {date}
+								slot = {class_item.slot}
+								type = {class_item.type}
 							/>
 						);
 					})}

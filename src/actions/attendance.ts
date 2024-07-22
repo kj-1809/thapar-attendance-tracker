@@ -6,9 +6,14 @@ import { auth } from "@clerk/nextjs/server";
 export async function markAttendance({
 	type,
 	course_name,
+	date,
+	slot
+
 }: {
 	type: AttendanceType;
 	course_name: string;
+	date: Date
+	slot: number
 }) {
 	const { userId } = auth();
 	console.log(userId);
@@ -34,8 +39,12 @@ export async function markAttendance({
 
 		// add attendance
 		const data = await prisma.attendance.create({
-			data : {
-
+			data: {
+				type,
+				date,
+				slot,
+				takenClassId: takenClassData.id,
+				userId
 			}
 		});
 
@@ -43,7 +52,7 @@ export async function markAttendance({
 		if (type == "ABSENT") {
 			await prisma.takenClass.update({
 				where: {
-					id: takenClassId,
+					id: takenClassData.id,
 				},
 				data: {
 					absent: {
@@ -54,7 +63,7 @@ export async function markAttendance({
 		} else {
 			await prisma.takenClass.update({
 				where: {
-					id: takenClassId,
+					id: takenClassData.id,
 				},
 				data: {
 					present: {
@@ -64,8 +73,8 @@ export async function markAttendance({
 			});
 		}
 
-		return { ok: true, data };
+		return { ok: true, message: "success" };
 	} catch (err) {
-		return { ok: false, data: {} };
+		return { ok: false, message : "error" };
 	}
 }
