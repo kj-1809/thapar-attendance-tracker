@@ -35,6 +35,8 @@ export default function Timetable({ group }: { group: string }) {
 			const { classes } = await getClasses(date);
 			return classes;
 		},
+		refetchOnWindowFocus: false,
+		staleTime: 5 * 60 * 1000,
 	});
 
 	function handleDateChange(date: Date) {

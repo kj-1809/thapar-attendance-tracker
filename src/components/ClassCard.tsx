@@ -57,7 +57,6 @@ export default function ClassCard({
 		}
 	});
 
-	console.log("marked ", markedAttendance);
 
 	return (
 		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">

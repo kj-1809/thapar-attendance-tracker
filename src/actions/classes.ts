@@ -66,7 +66,7 @@ export async function getClasses(date: Date) {
 		let n = attendances.length;
 		let j = 0;
 		let m = classes.length;
-
+		console.log("hit")
 		while (j < m) {
 			if (attendances[i] && classes[j].slot === attendances[i].slot) {
 				classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;
