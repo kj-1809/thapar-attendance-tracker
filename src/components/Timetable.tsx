@@ -22,46 +22,23 @@ const slotToTime = [
 	"5:10",
 ];
 
-export default function Timetable({
-	initialClasses,
-	group,
-}: {
-	initialClasses: detail_class[];
-	group: string;
-}) {
+export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
-	const [classes, setClasses] = useState<any>(initialClasses);
 
-	console.log(classes)
-
-
-	const {} = useQuery({
-		queryKey : ["classes"],
-		queryFn : async () => {
-			await getClasses(date)
-		},
-		initialData : initialClasses
-	})
-
-	const { isPending, mutate: fetchClasses } = useMutation({
-		mutationFn: async () => {
-			const data = await getClasses(date);
-			return data;
-		},
-		onSuccess: (data) => {
-			if (data.ok && data.classes) {
-				setClasses(data.classes);
-			}
-		},
-		onError: (err) => {
-			console.log(err);
-			toast.error("Some error occured while fetching!");
+	const {
+		refetch,
+		data: classes,
+		isLoading,
+	} = useQuery({
+		queryKey: ["classes", date],
+		queryFn: async () => {
+			const { classes } = await getClasses(date);
+			return classes;
 		},
 	});
 
 	function handleDateChange(date: Date) {
 		setDate(date);
-		fetchClasses();
 	}
 
 	return (
@@ -71,8 +48,8 @@ export default function Timetable({
 				<DatePicker date={date} onChangeDate={handleDateChange} />
 			</div>
 
-			{isPending && <h1 className="mx-auto my-2">Loading...</h1>}
-			{!isPending && (
+			{isLoading && <h1 className="mx-auto my-2">Loading...</h1>}
+			{!isLoading && (
 				<div className="flex flex-col items-center">
 					{classes.length == 0 && <h1>No classes! let's gooo!!!! </h1>}
 					{classes.map((class_item: any) => {
@@ -84,9 +61,9 @@ export default function Timetable({
 								location={class_item.location!}
 								time={slotToTime[class_item.slot || 0]}
 								markedAttendance={class_item.markedAttendance}
-								date = {date}
-								slot = {class_item.slot}
-								type = {class_item.type}
+								date={date}
+								slot={class_item.slot}
+								type={class_item.type}
 							/>
 						);
 					})}

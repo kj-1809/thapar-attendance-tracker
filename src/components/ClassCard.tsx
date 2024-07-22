@@ -10,7 +10,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { markAttendance } from "@/actions/attendance";
 import { AttendanceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -36,6 +36,7 @@ export default function ClassCard({
 	date: Date;
 }) {
 	const router = useRouter();
+	const queryClient = useQueryClient();
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (typeOfAttendance: AttendanceType) => {
@@ -48,10 +49,12 @@ export default function ClassCard({
 		},
 		onSuccess: () => {
 			// haha lol
-			console.log("success");
-			toast.success("attendance marked!");
-			router.refresh();
+			toast.success("Attendance marked!");
+			queryClient.invalidateQueries({ queryKey: ["classes", date] })
 		},
+		onError : () => {
+			toast.error("Operation Failed!")
+		}
 	});
 
 	console.log("marked ", markedAttendance);

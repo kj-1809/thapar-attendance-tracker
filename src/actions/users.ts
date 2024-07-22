@@ -6,8 +6,8 @@ export async function updateUserWithGroup(group: string) {
 	if (!userId) {
 		return { ok: false, message: "UNAUTHORIZED" };
 	}
-	if(group == ""){
-		return {ok: false, message: "Invalid group"}
+	if (group == "") {
+		return { ok: false, message: "Invalid group" };
 	}
 	try {
 		const coursesToBeTaken = await prisma.group_to_courses.findMany({
@@ -34,10 +34,10 @@ export async function updateUserWithGroup(group: string) {
 				update: {
 					currentGroup: group,
 				},
-				create : {
+				create: {
 					id: userId,
-					currentGroup : group
-				}
+					currentGroup: group,
+				},
 			}),
 			prisma.takenClass.createMany({
 				data: updatedCoursesToBeTaken,
@@ -47,6 +47,31 @@ export async function updateUserWithGroup(group: string) {
 		return { ok: true };
 	} catch (err) {
 		console.log(err);
+		return { ok: false };
+	}
+}
+
+export async function getGroup() {
+	const { userId } = auth();
+
+	if (!userId) {
+		return { ok: false };
+	}
+	try {
+		const data = await prisma.user.findFirst({
+			where: {
+				id: userId,
+			},
+			select: {
+				currentGroup: true,
+			},
+		});
+
+		if (!data) {
+			return { ok: false };
+		}
+		return { ok: true, group: data.currentGroup };
+	} catch (err) {
 		return { ok: false };
 	}
 }

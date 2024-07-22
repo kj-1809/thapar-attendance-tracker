@@ -43,7 +43,7 @@ export async function getClasses(date: Date) {
 			},
 		});
 
-		date = new Date(date.toDateString())
+		date = new Date(date.toDateString());
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
 			where: {
@@ -67,10 +67,6 @@ export async function getClasses(date: Date) {
 		let j = 0;
 		let m = classes.length;
 
-		console.log("i", i);
-		console.log(n);
-		console.log(attendances);
-
 		while (j < m) {
 			if (attendances[i] && classes[j].slot === attendances[i].slot) {
 				classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;
@@ -81,9 +77,9 @@ export async function getClasses(date: Date) {
 			j++;
 		}
 
-		return { ok: true, classes, group: user.currentGroup };
+		return { ok: true, classes };
 	} catch (err) {
-		console.log(err)
+		console.log(err);
 		return { ok: false, error: err };
 	}
 }
