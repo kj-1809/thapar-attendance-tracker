@@ -54,6 +54,8 @@ export default function ClassCard({
 		},
 	});
 
+	console.log("marked ", markedAttendance)
+
 	return (
 		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">
 			<div className="flex">
@@ -64,7 +66,7 @@ export default function ClassCard({
 				<div className="mx-4 h-32 w-1 bg-gray-300"></div>
 				<div className="flex flex-col justify-center">
 					<h1 className="text-xl">
-						{name} " " {type}
+						{name} {type}
 					</h1>
 					<h1 className="text-xl">{location}</h1>
 					<h1 className="text-xl">{professor}</h1>
@@ -74,7 +76,6 @@ export default function ClassCard({
 				<div className="flex items-center">
 					<div className="flex items-center">
 						<Dialog>
-							j
 							<DialogTrigger>
 								<div className="rounded-full p-3 bg-green-100 m-2">
 									<Check />

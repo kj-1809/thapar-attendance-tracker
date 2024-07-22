@@ -61,23 +61,30 @@ export async function getClasses(date: Date) {
 			},
 		});
 
-		let m = classes.length,
-			i = 0,
-			j = 0,
-			n = attendances.length;
+		let i = 0;
+		let n = attendances.length;
+		let j = 0;
+		let m = classes.length;
 
-		while (i < n) {
-			if (classes[j].slot === attendances[i].slot) {
+		console.log("i", i);
+		console.log(n);
+		console.log(attendances);
+
+		while (j < m) {
+			console.log("j" , j)
+			console.log(classes[j])
+			if (attendances[i] && classes[j].slot === attendances[i].slot) {
 				classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;
 				i++;
-			}else{
-				classes[j].markedAttendance = 0;	
+			} else {
+				classes[j].markedAttendance = 0;
 			}
 			j++;
 		}
 
 		return { ok: true, classes, group: user.currentGroup };
 	} catch (err) {
+		console.log(err)
 		return { ok: false, error: err };
 	}
 }

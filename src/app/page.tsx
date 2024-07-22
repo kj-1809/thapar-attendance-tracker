@@ -1,7 +1,5 @@
 import DayDropdown from "@/components/DayDropdown";
 import Timetable from "@/components/Timetable";
-import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/db";
 import { getClasses } from "@/actions/classes";
 
 export default async function Home() {
@@ -17,6 +15,9 @@ export default async function Home() {
 	if (!group) {
 		return <h1>No group found!</h1>;
 	}
+	
+	console.log(classes)
+	console.log("fdfd")
 
 	return (
 		<div className="p-2">

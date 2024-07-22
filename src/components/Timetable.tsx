@@ -2,7 +2,6 @@
 import React from "react";
 import ClassCard from "./ClassCard";
 import { detail_class } from "@prisma/client";
-import DayDropdown from "./DayDropdown";
 import { DatePicker } from "@/components/DatePicker";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -32,6 +31,8 @@ export default function Timetable({
 }) {
 	const [date, setDate] = useState<Date>(new Date());
 	const [classes, setClasses] = useState<any>(initialClasses);
+
+	console.log(classes)
 
 	const { isPending, mutate: fetchClasses } = useMutation({
 		mutationFn: async () => {
