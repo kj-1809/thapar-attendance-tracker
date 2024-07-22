@@ -34,6 +34,15 @@ export default function Timetable({
 
 	console.log(classes)
 
+
+	const {} = useQuery({
+		queryKey : ["classes"],
+		queryFn : async () => {
+			await getClasses(date)
+		},
+		initialData : initialClasses
+	})
+
 	const { isPending, mutate: fetchClasses } = useMutation({
 		mutationFn: async () => {
 			const data = await getClasses(date);

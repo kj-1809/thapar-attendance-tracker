@@ -54,7 +54,7 @@ export default function ClassCard({
 		},
 	});
 
-	console.log("marked ", markedAttendance)
+	console.log("marked ", markedAttendance);
 
 	return (
 		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">
@@ -124,8 +124,18 @@ export default function ClassCard({
 					</div>
 				</div>
 			)}
-			{markedAttendance === -1 && <h1>Absent marked</h1>}
-			{markedAttendance === 1 && <h1>Present marked</h1>}
+			{markedAttendance === 1 && (
+				<div className="flex flex-col items-center justify-center p-2">
+					<Check className="bg-green-200 rounded-full p-1 mb-1" />
+					<h1>Present</h1>
+				</div>
+			)}
+			{markedAttendance === -1 && (
+				<div className="flex flex-col items-center justify-center p-2">
+					<X className="bg-red-200 rounded-full p-1 mb-1" />
+					<h1>Absent</h1>
+				</div>
+			)}
 		</div>
 	);
 }

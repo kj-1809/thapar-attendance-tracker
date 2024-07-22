@@ -2,8 +2,11 @@
 import React from "react";
 import Progress from "react-circle-progress-bar";
 
-export default function DashboardCard({ title, value, total }) {
-	const percentage = (value / total) * 100;
+export default function DashboardCard({ title, value, total }: any) {
+	let percentage = 0;
+	if (!(value == 0 && total == 0)) {
+		percentage = (value / total) * 100;
+	}
 	return (
 		<div className="rounded-xl flex p-2 shadow-lg justify-center flex-col items-center">
 			<Progress
@@ -11,7 +14,7 @@ export default function DashboardCard({ title, value, total }) {
 				strokeWidth={15}
 				subtitle={title}
 				className="inline-block"
-				transiitionDuration = {1}
+				transiitionDuration={1}
 				gradient={
 					percentage < 75
 						? [
@@ -24,7 +27,10 @@ export default function DashboardCard({ title, value, total }) {
 						]
 				}
 			/>
-			{title}
+			<h1>{title}</h1>
+			<h1>
+				{value}/{total}
+			</h1>
 		</div>
 	);
 }

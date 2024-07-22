@@ -15,9 +15,6 @@ export default async function Home() {
 	if (!group) {
 		return <h1>No group found!</h1>;
 	}
-	
-	console.log(classes)
-	console.log("fdfd")
 
 	return (
 		<div className="p-2">
