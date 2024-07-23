@@ -13,7 +13,6 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { markAttendance } from "@/actions/attendance";
 import { AttendanceType } from "@prisma/client";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function ClassCard({
@@ -37,7 +36,7 @@ export default function ClassCard({
 }) {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending} = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (typeOfAttendance: AttendanceType) => {
       return await markAttendance({
         slot: slot,
@@ -47,7 +46,6 @@ export default function ClassCard({
       });
     },
     onSuccess: () => {
-      // haha lol
       toast.success("Attendance marked!");
       queryClient.invalidateQueries({ queryKey: ["classes", date] });
     },
@@ -93,6 +91,10 @@ export default function ClassCard({
                   <button
                     className="bg-green-300 px-4 py-2 rounded-md"
                     onClick={() => {
+                      if (new Date().getTime() < date.getTime()) {
+                        toast.error("Future attendance cannot be marked!");
+                        return;
+                      }
                       mutate("PRESENT");
                     }}
                   >
@@ -116,6 +118,10 @@ export default function ClassCard({
                   <button
                     className="bg-red-300 px-4 py-2 rounded-md"
                     onClick={() => {
+                      if (new Date().getTime() < date.getTime()) {
+                        toast.error("Future attendance cannot be marked!");
+                        return;
+                      }
                       mutate("ABSENT");
                     }}
                   >
