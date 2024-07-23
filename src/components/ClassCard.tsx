@@ -35,7 +35,6 @@ export default function ClassCard({
 	slot: number;
 	date: Date;
 }) {
-	const router = useRouter();
 	const queryClient = useQueryClient();
 
 	const { mutate, isPending } = useMutation({
@@ -57,6 +56,9 @@ export default function ClassCard({
 		}
 	});
 
+	if(isPending){
+		return  <h1>Loading...</h1>
+	}
 
 	return (
 		<div className="rounded-xl p-4 shadow-md flex mt-4 justify-between max-w-[500px] w-full">
