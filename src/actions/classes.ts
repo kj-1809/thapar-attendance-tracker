@@ -12,31 +12,18 @@ const days = [
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/db";
 
-export async function getClasses(date: Date) {
+export async function getClasses(date: Date, group: string) {
 	const day_number = date.getDay();
 	const { userId } = auth();
 	if (!userId) {
 		return { ok: false };
 	}
 	try {
-		// get the group
-		const user = await prisma.user.findFirst({
-			where: {
-				id: userId,
-			},
-			select: {
-				currentGroup: true,
-			},
-		});
-
-		if (!user) {
-			return { ok: false };
-		}
 		// get the classes
 		const classes: any = await prisma.detail_class.findMany({
 			where: {
 				day: days[day_number],
-				group_name: user.currentGroup,
+				group_name: group
 			},
 			orderBy: {
 				slot: "asc",
