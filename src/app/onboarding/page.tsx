@@ -7,6 +7,8 @@ export default async function OnboardingPage() {
 	if(!userId){
 		return <h1>Login first</h1>
 	}
+	
+	
 	const data = await prisma.class_group.findMany();
 	return (
 		<div className="flex flex-col items-center justify-center mt-10">
