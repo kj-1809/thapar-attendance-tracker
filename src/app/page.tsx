@@ -5,9 +5,9 @@ import { getGroup } from "@/actions/users";
 
 export default async function Home() {
 	const { ok, group } = await getGroup();
-	
-	if(!ok || !group){
-		return <h1>User group not found!</h1>
+
+	if (!ok || !group) {
+		return <h1>User group not found!</h1>;
 	}
 
 	return (

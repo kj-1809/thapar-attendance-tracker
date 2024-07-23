@@ -3,7 +3,7 @@ import React from "react";
 import ClassCard from "./ClassCard";
 import { DatePicker } from "@/components/DatePicker";
 import { useState } from "react";
-import {  useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getClasses } from "@/actions/classes";
 const slotToTime = [
 	"8:00",
@@ -23,10 +23,7 @@ const slotToTime = [
 export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
 
-	const {
-		data: classes,
-		isLoading,
-	} = useQuery({
+	const { data: classes, isLoading } = useQuery({
 		queryKey: ["classes", date],
 		queryFn: async () => {
 			const { classes } = await getClasses(date);
@@ -68,6 +65,9 @@ export default function Timetable({ group }: { group: string }) {
 					})}
 				</div>
 			)}
+			<div className = "flex justify-center">
+				<h1 className="mt-8 mx-auto">Made with ❤️ by KJ</h1>
+			</div>
 		</>
 	);
 }

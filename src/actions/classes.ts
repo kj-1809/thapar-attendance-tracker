@@ -63,7 +63,6 @@ export async function getClasses(date: Date) {
 		});
 
 		let i = 0;
-		let n = attendances.length;
 		let j = 0;
 		let m = classes.length;
 		console.log("hit")
