@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
 import ClassCard from "./ClassCard";
-import { detail_class } from "@prisma/client";
 import { DatePicker } from "@/components/DatePicker";
 import { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import {  useQuery } from "@tanstack/react-query";
 import { getClasses } from "@/actions/classes";
 const slotToTime = [
 	"8:00",
@@ -26,7 +24,6 @@ export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
 
 	const {
-		refetch,
 		data: classes,
 		isLoading,
 	} = useQuery({
