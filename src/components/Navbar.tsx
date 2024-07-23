@@ -1,7 +1,11 @@
 import ProfileDropdown from "@/components/ProfileDropdown";
 import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-export const Navbar = () => {
+import { currentUser } from '@clerk/nextjs/server';
+
+export const Navbar = async () => {
+	
+	const user = await currentUser();
 	
 
 	return (
@@ -10,7 +14,7 @@ export const Navbar = () => {
 				<h1 className="font-semibold">Trackit</h1>
 			</Link>
 			<SignedIn>
-				<ProfileDropdown />
+				<ProfileDropdown name = {user?.firstName!} imgUrl= {user?.imageUrl!}/>
 			</SignedIn>
 			<SignedOut>
 				<Link href = "/sign-in">
