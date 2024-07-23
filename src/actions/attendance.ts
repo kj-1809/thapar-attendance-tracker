@@ -15,6 +15,11 @@ export async function markAttendance({
 	date: Date
 	slot: number
 }) {
+	
+	if(new Date().getTime() < date.getTime()){
+		return {ok: false, message : "attendance in the future cannot be marked !"}
+	}
+
 	const { userId } = auth();
 	console.log(userId);
 

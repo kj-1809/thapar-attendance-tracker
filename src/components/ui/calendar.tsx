@@ -19,7 +19,7 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       hidden={[
-        { before: new Date(2024, 6, 29), after: new Date(2024, 11, 20) },
+        { before: new Date(2024, 6, 22), after: new Date(2024, 11, 20) },
       ]}
       className={cn("p-3", className)}
       classNames={{
