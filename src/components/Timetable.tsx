@@ -75,7 +75,7 @@ export default function Timetable({ group }: { group: string }) {
 				</div>
 			)}
 			<div className="flex justify-center">
-				<h1 className="mt-8 mx-auto">Made with ❤️ by KJ</h1>
+				<h1 className="mt-8 mx-auto">Designed and Developed by KJ</h1>
 			</div>
 		</>
 	);
