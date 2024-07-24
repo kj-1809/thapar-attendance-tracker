@@ -1,6 +1,7 @@
 "use server";
 import prisma from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
+
 export async function updateUserWithGroup(group: string) {
 	const { userId } = auth();
 	if (!userId) {

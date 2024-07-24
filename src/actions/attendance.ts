@@ -2,7 +2,7 @@
 import { AttendanceType } from "@prisma/client";
 import prisma from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
-//
+
 export async function markAttendance({
 	type,
 	course_name,

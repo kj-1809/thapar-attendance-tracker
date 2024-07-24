@@ -1,4 +1,7 @@
 "use server";
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/db";
+
 const days = [
 	"Sunday",
 	"Monday",
@@ -8,9 +11,6 @@ const days = [
 	"Friday",
 	"Wednesday",
 ];
-
-import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/db";
 
 export async function getClasses(date: Date, group: string) {
 	const day_number = date.getDay();

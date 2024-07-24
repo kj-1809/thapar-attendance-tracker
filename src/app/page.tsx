@@ -1,6 +1,4 @@
-import DayDropdown from "@/components/DayDropdown";
 import Timetable from "@/components/Timetable";
-import { getClasses } from "@/actions/classes";
 import { getGroup } from "@/actions/users";
 
 export default async function Home() {

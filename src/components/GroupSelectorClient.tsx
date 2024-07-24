@@ -27,11 +27,10 @@ export function GroupSelectorClient({ data }: { data: { name: string }[] }) {
       router.push("/");
     },
     onError: (err) => {
-      // toast message display
+			console.log(err)
       toast.error("Hell nah! error");
     },
   });
-  const haha = true;
   return (
     <div className="flex flex-col items-center">
       <GroupSelector
