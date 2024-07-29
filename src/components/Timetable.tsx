@@ -35,6 +35,7 @@ export default function Timetable({ group }: { group: string }) {
 	});
 
 	function handleDateChange(date: Date) {
+		console.log(date)
 		if (date) {
 			setDate(date);
 		}

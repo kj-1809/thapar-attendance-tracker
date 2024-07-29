@@ -9,11 +9,12 @@ const days = [
 	"Wednesday",
 	"Thursday",
 	"Friday",
-	"Wednesday",
+	"Saturday",
 ];
 
 export async function getClasses(date: Date, group: string) {
 	const day_number = date.getDay();
+	console.log(day_number);
 	const { userId } = auth();
 	if (!userId) {
 		return { ok: false };
