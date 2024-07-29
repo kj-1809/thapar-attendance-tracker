@@ -56,7 +56,7 @@ export default function Timetable({ group }: { group: string }) {
 			{!isLoading && (
 				<div className="flex flex-col items-center">
 					{classes.length == 0 && (
-						<h1 className="mt-10">No classes! let's gooo!!!! </h1>
+						<h1 className="mt-10">No classes for this day ! Relax ! </h1>
 					)}
 					{classes.map((class_item: any) => {
 						return (
