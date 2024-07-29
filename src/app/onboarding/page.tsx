@@ -14,8 +14,8 @@ export default async function OnboardingPage() {
 			id: userId
 		}
 	})
-
-	if(!(userData?.currentGroup === "unknown")){
+	console.log(userData)
+	if(userData && !(userData?.currentGroup === "unknown")){
 		permanentRedirect("/")
 	}
 	
