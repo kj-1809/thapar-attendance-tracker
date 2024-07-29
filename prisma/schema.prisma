@@ -25,7 +25,7 @@ model TakenClass {
   absent      Int          @default(0)
   userId      String
   attendances Attendance[]
-  User        User         @relation(fields: [userId], references: [id])
+  User        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId], map: "taken_class_userId_fkey")
   @@map("taken_class")
@@ -39,7 +39,7 @@ model Attendance {
   userId       String
   takenClassId String
   TakenClass   TakenClass     @relation(fields: [takenClassId], references: [id])
-  User         User           @relation(fields: [userId], references: [id])
+  User         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([takenClassId], map: "attendance_takenClassId_fkey")
   @@index([userId], map: "attendance_userId_fkey")
