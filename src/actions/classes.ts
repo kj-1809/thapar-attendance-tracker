@@ -13,7 +13,9 @@ const days = [
 ];
 
 export async function getClasses(dateString: string, group: string) {
-	const date = new Date(dateString);
+	const Olddate = new Date(dateString);
+	const date = new Date(Olddate.getTime() + 100000);
+			
 	const day_number = date.getDay();
 
 	const { userId } = auth();
