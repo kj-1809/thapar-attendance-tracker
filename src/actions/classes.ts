@@ -13,7 +13,9 @@ const days = [
 ];
 
 export async function getClasses(date: Date, group: string) {
-	const day_number = new Date(date).getDay();
+	console.log("tpeee: ")
+	console.log(typeof date)
+	const day_number = new Date(date.toISOString()).getDay();
 	console.log(day_number);
 	const { userId } = auth();
 	if (!userId) {
