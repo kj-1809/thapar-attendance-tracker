@@ -12,15 +12,15 @@ const days = [
 	"Saturday",
 ];
 
-export async function getClasses(date: Date, group: string) {
-	console.log("tpeee: ")
-	console.log(typeof date)
-	const day_number = new Date(date.toISOString()).getDay();
-	console.log(day_number);
+export async function getClasses(dateString: string, group: string) {
+	const date = new Date(dateString);
+	const day_number = date.getDay();
+
 	const { userId } = auth();
 	if (!userId) {
 		return { ok: false };
 	}
+
 	console.log("date: ", date)
 	console.log("serverrrrr day num : ", day_number)
 	try {
@@ -35,13 +35,13 @@ export async function getClasses(date: Date, group: string) {
 			},
 		});
 
-		date = new Date(date.toDateString());
+		const updatedDate = new Date(date.toDateString());
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
 			where: {
 				date: {
-					gte: date,
-					lt: new Date(date.getTime() + 24 * 60 * 60 * 1000),
+					gte: updatedDate,
+					lt: new Date(updatedDate.getTime() + 24 * 60 * 60 * 1000),
 				},
 				userId: userId,
 			},

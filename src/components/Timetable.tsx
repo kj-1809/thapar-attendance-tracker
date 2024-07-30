@@ -34,7 +34,7 @@ export default function Timetable({ group }: { group: string }) {
 	} = useQuery({
 		queryKey: ["classes", date.getTime()],
 		queryFn: async () => {
-			const { classes } = await getClasses(date, group);
+			const { classes } = await getClasses(date.toISOString(), group);
 			return classes;
 		},
 		refetchOnWindowFocus: false,
