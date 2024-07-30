@@ -56,7 +56,7 @@ export default function Timetable({ group }: { group: string }) {
 				<DatePicker date={date} onChangeDate={handleDateChange} />
 			</div>
 
-			<h1>date : {date.toLocaleString()}</h1>
+			<h1>date : {date.toLocaleString()} day : {date.getDay()}</h1>
 
 			{isLoading && (
 				<div className="flex flex-col items-center">

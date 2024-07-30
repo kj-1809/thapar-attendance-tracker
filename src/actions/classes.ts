@@ -19,6 +19,7 @@ export async function getClasses(date: Date, group: string) {
 	if (!userId) {
 		return { ok: false };
 	}
+	console.log("serverrrrr day num : ", day_number)
 	try {
 		// get the classes
 		const classes: any = await prisma.detail_class.findMany({
