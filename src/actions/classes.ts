@@ -13,7 +13,7 @@ const days = [
 ];
 
 export async function getClasses(date: Date, group: string) {
-	const day_number = date.getDay();
+	const day_number = new Date(date).getDay();
 	console.log(day_number);
 	const { userId } = auth();
 	if (!userId) {
