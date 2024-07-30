@@ -15,6 +15,7 @@ const days = [
 export async function getClasses(dateString: string, group: string) {
 	const date = new Date(dateString);
 	let day_number = date.getDay();
+	console.log("utcc ", date.getUTCDay())
 
 	const { userId } = auth();
 	if (!userId) {
