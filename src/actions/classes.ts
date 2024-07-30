@@ -14,7 +14,7 @@ const days = [
 
 export async function getClasses(dateString: string, group: string) {
 	const Olddate = new Date(dateString);
-	const date = new Date(Olddate.getTime() + 100000);
+	const date = new Date(Olddate.getTime() + 100000000);
 			
 	const day_number = date.getDay();
 
