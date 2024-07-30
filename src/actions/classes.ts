@@ -19,6 +19,7 @@ export async function getClasses(date: Date, group: string) {
 	if (!userId) {
 		return { ok: false };
 	}
+	console.log("date: ", date)
 	console.log("serverrrrr day num : ", day_number)
 	try {
 		// get the classes
@@ -54,7 +55,6 @@ export async function getClasses(date: Date, group: string) {
 		let i = 0;
 		let j = 0;
 		let m = classes.length;
-		console.log("hit")
 		while (j < m) {
 			if (attendances[i] && classes[j].slot === attendances[i].slot) {
 				classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;

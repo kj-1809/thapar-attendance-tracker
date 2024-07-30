@@ -49,6 +49,7 @@ export default function Timetable({ group }: { group: string }) {
 		}
 	}
 
+
 	return (
 		<>
 			<div className="flex justify-between mt-2 sm:mx-4">
