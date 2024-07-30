@@ -1,6 +1,8 @@
 import Timetable from "@/components/Timetable";
 import { getGroup } from "@/actions/users";
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
 	const { ok, group } = await getGroup();
 

@@ -21,6 +21,8 @@ const slotToTime = [
 	"5:10",
 ];
 
+export const dynamic = 'force-dynamic'
+
 export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
 	const queryClient = useQueryClient()
@@ -30,7 +32,7 @@ export default function Timetable({ group }: { group: string }) {
 		isLoading,
 		refetch,
 	} = useQuery({
-		queryKey: ["classes", date],
+		queryKey: ["classes", date.getTime()],
 		queryFn: async () => {
 			const { classes } = await getClasses(date, group);
 			return classes;
@@ -43,7 +45,7 @@ export default function Timetable({ group }: { group: string }) {
 		console.log(date);
 		if (date) {
 			setDate(date);
-			queryClient.invalidateQueries({queryKey : ["classes", date]})
+			queryClient.invalidateQueries({queryKey : ["classes", date.getTime()]})
 		}
 	}
 
