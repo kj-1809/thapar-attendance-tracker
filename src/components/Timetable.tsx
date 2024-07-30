@@ -24,7 +24,11 @@ const slotToTime = [
 export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
 
-	const { data: classes, isLoading } = useQuery({
+	const {
+		data: classes,
+		isLoading,
+		refetch,
+	} = useQuery({
 		queryKey: ["classes", date],
 		queryFn: async () => {
 			const { classes } = await getClasses(date, group);
@@ -38,6 +42,7 @@ export default function Timetable({ group }: { group: string }) {
 		console.log(date);
 		if (date) {
 			setDate(date);
+			refetch()
 		}
 	}
 
