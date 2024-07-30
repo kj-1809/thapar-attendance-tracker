@@ -23,6 +23,7 @@ export async function getClasses(dateString: string, group: string) {
 
 	console.log("date: ", date)
 	console.log("serverrrrr day num : ", day_number)
+	console.log(date.getTimezoneOffset())
 	try {
 		// get the classes
 		const classes: any = await prisma.detail_class.findMany({
