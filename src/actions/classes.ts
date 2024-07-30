@@ -14,17 +14,19 @@ const days = [
 
 export async function getClasses(dateString: string, group: string) {
 	const date = new Date(dateString);
-	let day_number = date.getDay();
-	console.log("utcc ", date.getUTCDay())
+	const adjustedDate = new Date(date.getTime() + 1000 * 60 * 60 * 5.5);
+
+	
+	let day_number = adjustedDate.getUTCDay()
 
 	const { userId } = auth();
 	if (!userId) {
 		return { ok: false };
 	}
 
-	console.log("date: ", date)
+	console.log("date adjusted : ", adjustedDate)
 	console.log("serverrrrr day num : ", day_number)
-	console.log(date.getTimezoneOffset())
+
 	try {
 		// get the classes
 		const classes: any = await prisma.detail_class.findMany({
@@ -37,7 +39,8 @@ export async function getClasses(dateString: string, group: string) {
 			},
 		});
 
-		const updatedDate = new Date(date.toDateString());
+		const updatedDate = new Date(adjustedDate.toDateString());
+		console.log("updated date : ", updatedDate)
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
 			where: {
