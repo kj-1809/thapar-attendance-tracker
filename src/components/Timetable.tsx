@@ -3,7 +3,7 @@ import React from "react";
 import ClassCard from "./ClassCard";
 import { DatePicker } from "@/components/DatePicker";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getClasses } from "@/actions/classes";
 import LoadingSkeleton from "./LoadingSkeleton";
 const slotToTime = [
@@ -23,6 +23,7 @@ const slotToTime = [
 
 export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date());
+	const queryClient = useQueryClient()
 
 	const {
 		data: classes,
@@ -42,7 +43,7 @@ export default function Timetable({ group }: { group: string }) {
 		console.log(date);
 		if (date) {
 			setDate(date);
-			refetch()
+			queryClient.invalidateQueries({queryKey : ["classes", date]})
 		}
 	}
 
