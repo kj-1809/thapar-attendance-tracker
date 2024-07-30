@@ -35,7 +35,7 @@ export default function Timetable({ group }: { group: string }) {
 	});
 
 	function handleDateChange(date: Date) {
-		console.log(date)
+		console.log(date);
 		if (date) {
 			setDate(date);
 		}
@@ -47,6 +47,8 @@ export default function Timetable({ group }: { group: string }) {
 				<h1 className="px-4 py-2 bg-purple-200 rounded-md">{group}</h1>
 				<DatePicker date={date} onChangeDate={handleDateChange} />
 			</div>
+
+			<h1>date : {date.toLocaleString()}</h1>
 
 			{isLoading && (
 				<div className="flex flex-col items-center">
