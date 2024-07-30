@@ -15,9 +15,6 @@ const days = [
 export async function getClasses(dateString: string, group: string) {
 	const date = new Date(dateString);
 	let day_number = date.getDay();
-	
-	day_number += 1;
-	day_number %= 7;
 
 	const { userId } = auth();
 	if (!userId) {
