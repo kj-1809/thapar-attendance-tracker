@@ -41,8 +41,9 @@ export async function getClasses(dateString: string, group: string) {
 				slot: "asc",
 			},
 		});
-
+		
 		const updatedDate = new Date(date.toDateString());
+		console.log("to date string: ", date.toDateString());
 		console.log("updated date : ", updatedDate)
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
