@@ -26,6 +26,9 @@ export async function getClasses(dateString: string, group: string) {
 
 	console.log("date adjusted : ", adjustedDate)
 	console.log("serverrrrr day num : ", day_number)
+	console.log("offset : ", date.getTimezoneOffset())
+	console.log("offset 2: ", adjustedDate.getTimezoneOffset())
+	
 
 	try {
 		// get the classes
@@ -39,7 +42,7 @@ export async function getClasses(dateString: string, group: string) {
 			},
 		});
 
-		const updatedDate = new Date(adjustedDate.toDateString());
+		const updatedDate = new Date(date.toDateString());
 		console.log("updated date : ", updatedDate)
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
