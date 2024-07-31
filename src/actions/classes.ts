@@ -38,17 +38,15 @@ export async function getClasses(dateString: string, group: string) {
 				slot: "asc",
 			},
 		});
-		
-		const updatedDate = date;	
-		console.log("updated date : ", updatedDate.toLocaleString())
-
+	
+		console.log("date: ", date.toLocaleString())
 
 		// get the already marked attendance
 		const attendances = await prisma.attendance.findMany({
 			where: {
 				date: {
-					gte: updatedDate,
-					lt: new Date(updatedDate.getTime() + 24 * 60 * 60 * 1000),
+					gte: date,
+					lt: new Date(date.getTime() + 24 * 60 * 60 * 1000),
 				},
 				userId: userId,
 			},

@@ -21,10 +21,8 @@ const slotToTime = [
 	"5:10",
 ];
 
-export const dynamic = 'force-dynamic'
-
 export default function Timetable({ group }: { group: string }) {
-	const [date, setDate] = useState<Date>(new Date());
+	const [date, setDate] = useState<Date>(new Date(new Date().toDateString()));
 	const queryClient = useQueryClient()
 
 	const {
