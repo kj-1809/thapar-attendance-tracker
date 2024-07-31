@@ -28,7 +28,6 @@ export default function Timetable({ group }: { group: string }) {
 	const {
 		data: classes,
 		isLoading,
-		refetch,
 	} = useQuery({
 		queryKey: ["classes", date.getTime()],
 		queryFn: async () => {
