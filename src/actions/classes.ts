@@ -39,44 +39,42 @@ export async function getClasses(dateString: string, group: string) {
 			},
 		});
 		
-		const updatedDate = new Date(adjustedDate.getUTCFullYear(), adjustedDate.getUTCMonth(), adjustedDate.getUTCDate());
-		console.log("updated date : ", updatedDate)
+		const updatedDate = date;	
+		console.log("updated date : ", updatedDate.toLocaleString())
 
-		const attendances = await prisma.attendance.findMany();
-		console.log("attendances : ", attendances)
 
 		// get the already marked attendance
-		// const attendances = await prisma.attendance.findMany({
-		// 	where: {
-		// 		date: {
-		// 			gte: updatedDate,
-		// 			lt: new Date(updatedDate.getTime() + 24 * 60 * 60 * 1000),
-		// 		},
-		// 		userId: userId,
-		// 	},
-		// 	select: {
-		// 		slot: true,
-		// 		type: true,
-		// 	},
-		// 	orderBy: {
-		// 		slot: "asc",
-		// 	},
-		// });
-		
+		const attendances = await prisma.attendance.findMany({
+			where: {
+				date: {
+					gte: updatedDate,
+					lt: new Date(updatedDate.getTime() + 24 * 60 * 60 * 1000),
+				},
+				userId: userId,
+			},
+			select: {
+				slot: true,
+				type: true,
+			},
+			orderBy: {
+				slot: "asc",
+			},
+		});
 
 
-		// let i = 0;
-		// let j = 0;
-		// let m = classes.length;
-		// while (j < m) {
-		// 	if (attendances[i] && classes[j].slot === attendances[i].slot) {
-		// 		classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;
-		// 		i++;
-		// 	} else {
-		// 		classes[j].markedAttendance = 0;
-		// 	}
-		// 	j++;
-		// }
+
+		let i = 0;
+		let j = 0;
+		let m = classes.length;
+		while (j < m) {
+			if (attendances[i] && classes[j].slot === attendances[i].slot) {
+				classes[j].markedAttendance = attendances[i].type === "ABSENT" ? -1 : 1;
+				i++;
+			} else {
+				classes[j].markedAttendance = 0;
+			}
+			j++;
+		}
 
 		return { ok: true, classes };
 	} catch (err) {
