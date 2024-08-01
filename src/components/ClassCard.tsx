@@ -65,12 +65,12 @@ export default function ClassCard({
         </div>
         <div className="mx-4 h-32 w-1 bg-gray-300"></div>
         <div className="flex flex-col justify-center">
-          <h1 className="text-lg">
+          <h1 className="text-md sm:text-lg">
             {name} {type}
           </h1>
-          {class_name && <h1 className="text-lg">{class_name}</h1>}
-          <h1 className="text-lg">{location}</h1>
-          {!class_name && <h1 className="text-lg">{professor}</h1>}
+          {class_name && <h1 className="text-md sm:text-lg">{class_name}</h1>}
+          <h1 className="text-md sm:text-lg">{location}</h1>
+          {!class_name && <h1 className="text-md sm:text-lg">{professor}</h1>}
         </div>
       </div>
       {markedAttendance === 0 && (

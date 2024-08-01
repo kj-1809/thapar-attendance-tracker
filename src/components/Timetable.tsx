@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getClasses } from "@/actions/classes";
 import LoadingSkeleton from "./LoadingSkeleton";
+import { max } from "date-fns";
 const slotToTime = [
 	"8:00",
 	"8:50",
@@ -27,7 +28,8 @@ const codeToName: any = {
 	"UCS405" : "DISCRETE MATHS",
 	"UTA016" : "ENG. DESIGN PROJECT",
 	"UMA021" : "LINEAR ALGEBRA",
-	"UHU050" : "PSYCHOLOGY"
+	"UHU050" : "PSYCHOLOGY",
+	"UHU005" : "HUMANITIES"
 }
 
 export default function Timetable({ group }: { group: string }) {
