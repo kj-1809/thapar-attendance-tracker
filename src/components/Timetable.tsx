@@ -30,11 +30,15 @@ const codeToName: any = {
   UMA021: "LINEAR ALGEBRA",
   UHU050: "PSYCHOLOGY",
   UHU005: "HUMANITIES",
+	UCT301: "AUTOMATION THEORY",
+	UCT302: "COMPUTER ARCHITECTURE",
+	UCT303: "OOPS",
+	UCT304: "COMPUTATIONAL STATS",
+	UCT305: "SOFTWARE ENGINEERING"
 };
 
 export default function Timetable({ group }: { group: string }) {
   const [date, setDate] = useState<Date>(new Date(new Date().toDateString()));
-  const queryClient = useQueryClient();
 
   const { data: classes, isLoading } = useQuery({
     queryKey: ["classes", date],
@@ -99,7 +103,10 @@ export default function Timetable({ group }: { group: string }) {
             <b>KJ</b>
           </a>
         </h1>
-				<h3 className = "text-center opacity-50 text-sm">Email : thapartrackit.kj1809@gmail.com (for complaints and suggestions)</h3>
+        <h3 className="text-center opacity-50 text-sm">
+          Email : thapartrackit.kj1809@gmail.com (for complaints and
+          suggestions)
+        </h3>
       </div>
     </>
   );
