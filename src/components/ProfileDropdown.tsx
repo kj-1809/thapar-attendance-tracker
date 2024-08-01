@@ -42,7 +42,7 @@ export default function ProfileDropdown({
 				<DropdownMenuItem>
 					<LogOut />
 					<div className="ml-2">
-						<SignOutButton />
+						<SignOutButton redirectUrl = "/sign-in"/>
 					</div>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
