@@ -29,7 +29,7 @@ export default function Timetable({ group }: { group: string }) {
 		data: classes,
 		isLoading,
 	} = useQuery({
-		queryKey: ["classes", date.getTime()],
+		queryKey: ["classes", date],
 		queryFn: async () => {
 			const { classes } = await getClasses(date.toISOString(), group);
 			return classes;
@@ -42,10 +42,9 @@ export default function Timetable({ group }: { group: string }) {
 		console.log(date);
 		if (date) {
 			setDate(date);
-			queryClient.invalidateQueries({queryKey : ["classes", date.getTime()]})
+			// queryClient.invalidateQueries({queryKey : ["classes", date.getTime()]})
 		}
 	}
-
 
 	return (
 		<>
