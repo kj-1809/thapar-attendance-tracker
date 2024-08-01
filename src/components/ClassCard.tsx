@@ -63,11 +63,11 @@ export default function ClassCard({
         </div>
         <div className="mx-4 h-32 w-1 bg-gray-300"></div>
         <div className="flex flex-col justify-center">
-          <h1 className="text-xl">
+          <h1 className="text-lg">
             {name} {type}
           </h1>
-          <h1 className="text-xl">{location}</h1>
-          <h1 className="text-xl">{professor}</h1>
+          <h1 className="text-lg">{location}</h1>
+          <h1 className="text-lg">{professor}</h1>
         </div>
       </div>
       {markedAttendance === 0 && (
