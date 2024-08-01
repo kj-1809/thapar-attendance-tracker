@@ -20,7 +20,7 @@ const slotToTime = [
 	"4:20",
 	"5:10",
 ];
-const codeToName = {
+const codeToName: any = {
 	"UCS303" : "OS",
 	"UTA018" : "OOPS",
 	"UCS301" : "DATA STRUCTURES",
