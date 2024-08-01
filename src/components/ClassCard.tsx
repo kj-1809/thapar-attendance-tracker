@@ -47,7 +47,7 @@ export default function ClassCard({
     },
     onSuccess: () => {
       toast.success("Attendance marked!");
-      queryClient.invalidateQueries({ queryKey: ["classes", date.getTime()] });
+      queryClient.invalidateQueries({ queryKey: ["classes", date] });
     },
     onError: () => {
       toast.error("Operation Failed!");
