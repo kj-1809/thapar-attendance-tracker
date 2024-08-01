@@ -24,6 +24,7 @@ export default function ClassCard({
   type,
   slot,
   date,
+  class_name,
 }: {
   name: string;
   professor: string;
@@ -33,6 +34,7 @@ export default function ClassCard({
   type: string;
   slot: number;
   date: Date;
+  class_name: string;
 }) {
   const queryClient = useQueryClient();
 
@@ -66,8 +68,9 @@ export default function ClassCard({
           <h1 className="text-lg">
             {name} {type}
           </h1>
+          {class_name && <h1 className="text-lg">{class_name}</h1>}
           <h1 className="text-lg">{location}</h1>
-          <h1 className="text-lg">{professor}</h1>
+          {!class_name && <h1 className="text-lg">{professor}</h1>}
         </div>
       </div>
       {markedAttendance === 0 && (

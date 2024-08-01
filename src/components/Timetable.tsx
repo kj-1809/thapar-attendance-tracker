@@ -20,6 +20,15 @@ const slotToTime = [
 	"4:20",
 	"5:10",
 ];
+const codeToName = {
+	"UCS303" : "OS",
+	"UTA018" : "OOPS",
+	"UCS301" : "DATA STRUCTURES",
+	"UCS405" : "DISCRETE MATHS",
+	"UTA016" : "ENG. DESIGN PROJECT",
+	"UMA021" : "LINEAR ALGEBRA",
+	"UHU050" : "PSYCHOLOGY"
+}
 
 export default function Timetable({ group }: { group: string }) {
 	const [date, setDate] = useState<Date>(new Date(new Date().toDateString()));
@@ -75,6 +84,7 @@ export default function Timetable({ group }: { group: string }) {
 								date={date}
 								slot={class_item.slot}
 								type={class_item.type}
+								class_name = {codeToName[class_item.course_name!]}
 							/>
 						);
 					})}
