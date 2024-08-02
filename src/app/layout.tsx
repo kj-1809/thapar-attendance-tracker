@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Navbar } from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 const foldit = Foldit({
@@ -43,6 +44,7 @@ export default function RootLayout({
             <Navbar />
             <Toaster position="bottom-center" reverseOrder={false} />
             {children}
+						<Analytics />
           </Providers>
         </body>
       </html>
