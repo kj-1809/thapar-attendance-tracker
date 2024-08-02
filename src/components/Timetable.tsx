@@ -22,7 +22,7 @@ const slotToTime = [
   "5:10",
 ];
 const codeToName: any = {
-  UCS303: "OS",
+  UCS303: "OPERATING SYSTEM",
   UTA018: "OOPS",
   UCS301: "DATA STRUCTURES",
   UCS405: "DISCRETE MATHS",
@@ -42,7 +42,6 @@ const codeToName: any = {
 	UNC304: "DISCRETE MATHS",
 	UES301: "ELECTRONIC CIRCUITS",
 	UTD003: "EMPLOYMENT SKILLS"
-
 };
 
 export default function Timetable({ group }: { group: string }) {
