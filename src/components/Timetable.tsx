@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getClasses } from "@/actions/classes";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { max } from "date-fns";
+import {codeToName} from "@/lib/mappings"
 const slotToTime = [
   "8:00",
   "8:50",
@@ -21,41 +22,6 @@ const slotToTime = [
   "4:20",
   "5:10",
 ];
-const codeToName: any = {
-  UCS303: "OPERATING SYSTEM",
-  UTA018: "OOPS",
-  UCS301: "DATA STRUCTURES",
-  UCS405: "DISCRETE MATHS",
-  UTA016: "ENG. DESIGN PROJECT 1",
-  UMA021: "LINEAR ALGEBRA",
-  UHU050: "PSYCHOLOGY",
-  UHU005: "HUMANITIES",
-	UCT301: "AUTOMATION THEORY",
-	UCT302: "COMPUTER ARCHITECTURE",
-	UCT303: "OOPS",
-	UCT304: "COMPUTATIONAL STATS",
-	UCT305: "SOFTWARE ENGINEERING",
-	UMA035: "OPTIMIZATION TECHNIQUES",
-	UNC303: "COMMUNICATION NETWORKS",
-	UES012: "ENGINEERING MATERIALS",
-	UNC302: "OOPS PRACTICES",
-	UNC304: "DISCRETE MATHS",
-	UES301: "ANALOG CIRCUITS",
-	UMA028: "MATHS FOR DS",
-	UEE304: "ELECTRIC POWER",
-	UEE301: "DC MACHINES",
-	UES302: "MEASUREMENT SYSTEMS",
-	UTA030: "ENG. DESIGN PROJECT",
-	UTD003: "APTITUDE",
-	UMA301: "DISCRETE MATHS",
-	ULC301: "DATA STRUCTURES",
-	ULC302: "NETWORK THEORY",
-	ULC303: "COMPUTER ARCHITECHTURE",
-	UTD002: "EMPLOYMENT DEVELOPMENT",
-	UEC311: "CIRCUIT ANALYSIS",
-	UEC612: "DIGITAL SYSTEM",
-	UEC513: "EMBEDDED SYSTEMS"
-};
 
 export default function Timetable({ group }: { group: string }) {
   const [date, setDate] = useState<Date>(new Date(new Date().toDateString()));

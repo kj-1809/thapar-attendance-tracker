@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Progress from "react-circle-progress-bar";
+import { codeToName } from "@/lib/mappings";
 
 export default function DashboardCard({ title, value, total }: any) {
 	let percentage = 0;
@@ -28,6 +29,7 @@ export default function DashboardCard({ title, value, total }: any) {
 				}
 			/>
 			<h1>{title}</h1>
+			<h1>{codeToName[title]}</h1>
 			<h1>
 				{value}/{total}
 			</h1>
