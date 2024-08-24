@@ -78,6 +78,9 @@ export default function Timetable({ group }: { group: string }) {
     }
   }
 
+	console.log("classes : ")
+	console.log(classes)
+
   return (
     <>
       <div className="flex justify-between mt-2 sm:mx-4">
@@ -104,6 +107,7 @@ export default function Timetable({ group }: { group: string }) {
                 location={class_item.location!}
                 time={slotToTime[class_item.slot || 0]}
                 markedAttendance={class_item.markedAttendance}
+								markedAttendanceId={class_item.markedAttendanceId}
                 date={date}
                 slot={class_item.slot}
                 type={class_item.type}
