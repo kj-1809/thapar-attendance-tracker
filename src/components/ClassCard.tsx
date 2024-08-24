@@ -42,19 +42,24 @@ export default function ClassCard({
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (typeOfAttendance: AttendanceType) => {
-			return await markAttendance({
+			const res = await markAttendance({
 				slot: slot,
 				date: date,
 				course_name: name,
 				type: typeOfAttendance,
 			});
+			if (!res.ok) {
+				throw new Error(res.message);
+			}
+			return res;
 		},
 		onSuccess: () => {
 			toast.success("Attendance marked!");
 			queryClient.invalidateQueries({ queryKey: ["classes", date] });
 		},
-		onError: () => {
+		onError: (err) => {
 			toast.error("Operation Failed!");
+			console.log(err);
 		},
 	});
 
@@ -69,6 +74,7 @@ export default function ClassCard({
 		},
 		onSuccess: (data) => {
 			toast.success("Unmarked attendance");
+			queryClient.invalidateQueries({ queryKey: ["classes", date] });
 		},
 		onError: (err) => {
 			console.log(err);

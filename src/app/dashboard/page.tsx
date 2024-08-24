@@ -1,7 +1,6 @@
 import DashboardCard from "@/components/DashboardCard";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/db";
-import { codeToName } from "@/lib/mappings";
 export default async function Dashboard() {
 	const { userId } = auth();
 	if (!userId) {
